@@ -5,8 +5,9 @@ $a = new AscArray();
 
 
 $a->add(5);
-$a->add(2);
 $a->add(15);
+
+$a->add(2);
 
 $a->add(111);
 
