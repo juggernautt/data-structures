@@ -29,7 +29,7 @@ class AscArray
 
     /**
      * Remove all occurences of $num in array.
-     * @return  amount of elements that were removed
+     * @return  int - amount of elements that were removed
      * @param $num
      */
     public function remove($num)
