@@ -10,18 +10,27 @@ class AscArray
 {
     private $data = [];
 
-    public function add($num)
+    public function add($entity)
     {
         $inserted = false;
         for ($i = 0; $i < count($this->data); $i++) {
-            if ($num < $this->data[$i]) {
-                $this->insert($i, $num);
+            if (is_scalar($entity)) {
+                $arg1 = $entity;
+                $arg2 = $this->data[$i];
+            } else {
+                $arg1 = $entity->value();
+                $arg2 = $this->data[$i]->value();
+            }
+
+
+            if ($arg1 < $arg2) {
+                $this->insert($i, $entity);
                 $inserted = true;
                 break;
             }
         }
         if(!$inserted) {
-            $this->data[] = $num;
+            $this->data[] = $entity;
         }
 
     }

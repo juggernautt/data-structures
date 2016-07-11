@@ -3,11 +3,28 @@ require 'lib/asc_array.class.php';
 
 $a = new AscArray();
 
+class Animal {
+    private $_name;
+    private $_age;
 
-$a->add(5);
-$a->add(5);
-$a->add(15);
-$a->add(15); // [5,5,15,15]
+
+    public function __construct($name, $age)
+    {
+        $this->_name = $name;
+        $this->_age = $age;
+    }
+
+    public function value()
+    {
+        return $this->_age;
+    }
+}
+
+$a1 = new Animal("Ben", 4.5);
+$a2 = new Animal("Masha", 16);
+
+$a->add($a2);
+$a->add($a1);
 
 var_dump($a->remove(5)); //should print 1
 var_dump($a->remove(555)); //should print 0
