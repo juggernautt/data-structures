@@ -35,9 +35,9 @@ class AscArray
     public function remove($num)
     {
         $removed = 0;
-        for ($i = 0; $i < count($this->data); $i++) {
+        for ($i = count($this->data) - 1; $i >= 0; $i--) {
             if ($num == $this->data[$i]) {
-               unset($this->data[$i]);
+                array_splice($this->data, $i, 1);
                 $removed++;
             }
         }
