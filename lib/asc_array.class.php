@@ -15,7 +15,7 @@ class AscArray
         $inserted = false;
         for ($i = 0; $i < count($this->data); $i++) {
             if ($num < $this->data[$i]) {
-                array_splice($this->data, $i, 0, array($num));
+                $this->insert($i, $num);
                 $inserted = true;
                 break;
             }
@@ -37,7 +37,7 @@ class AscArray
         $removed = 0;
         for ($i = count($this->data) - 1; $i >= 0; $i--) {
             if ($num == $this->data[$i]) {
-                array_splice($this->data, $i, 1);
+                $this->delete($i);
                 $removed++;
             }
         }
@@ -47,5 +47,27 @@ class AscArray
     public function get_all()
     {
         return $this->data;
+    }
+
+    private function insert($index, $num)
+    {
+        for ($i = count($this->data); $i > $index; $i--) {
+            $this->data[$i] = $this->data[$i-1];
+        }
+        $this->data[$index] = $num;
+    }
+
+    /**
+     * @param $index
+     * @return integer - deleted number
+     */
+    private function delete($index)
+    {
+        $num = $this->data[$index];
+        for ($i = $index; $i < count($this->data) - 1; $i++) {
+            $this->data[$i] = $this->data[$i+1];
+        }
+        unset($this->data[count($this->data) - 1]);
+        return $num;
     }
 }
