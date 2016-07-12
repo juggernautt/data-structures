@@ -29,23 +29,37 @@ class AscArray
                 break;
             }
         }
-        if(!$inserted) {
+        if (!$inserted) {
             $this->data[] = $entity;
         }
 
+    }
+
+    public function get($index)
+    {
+        return isset($this->data[$index]) ? $this->data[$index] : null;
     }
 
 
     /**
      * Remove all occurences of $num in array.
      * @return  int - amount of elements that were removed
-     * @param $num
+     * @param Animal $entity
      */
-    public function remove($num)
+    public function remove($entity)
     {
         $removed = 0;
         for ($i = count($this->data) - 1; $i >= 0; $i--) {
-            if ($num == $this->data[$i]) {
+
+            if (is_scalar($entity)) {
+                $arg1 = $entity;
+                $arg2 = $this->data[$i];
+            } else {
+                $arg1 = $entity->value();
+                $arg2 = $this->data[$i]->value();
+            }
+
+            if ($arg1 == $arg2) {
                 $this->delete($i);
                 $removed++;
             }
@@ -61,7 +75,7 @@ class AscArray
     private function insert($index, $num)
     {
         for ($i = count($this->data); $i > $index; $i--) {
-            $this->data[$i] = $this->data[$i-1];
+            $this->data[$i] = $this->data[$i - 1];
         }
         $this->data[$index] = $num;
     }
@@ -74,7 +88,7 @@ class AscArray
     {
         $num = $this->data[$index];
         for ($i = $index; $i < count($this->data) - 1; $i++) {
-            $this->data[$i] = $this->data[$i+1];
+            $this->data[$i] = $this->data[$i + 1];
         }
         unset($this->data[count($this->data) - 1]);
         return $num;

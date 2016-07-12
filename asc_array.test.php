@@ -26,6 +26,6 @@ $a2 = new Animal("Masha", 16);
 $a->add($a2);
 $a->add($a1);
 
-var_dump($a->remove(5)); //should print 1
-var_dump($a->remove(555)); //should print 0
+var_dump($a->remove($a1)); //should print 1
+//var_dump($a->remove(555)); //should print 0
 var_dump($a->get_all()); //should print [2,5,111]
