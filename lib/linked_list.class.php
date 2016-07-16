@@ -39,6 +39,8 @@ class AscLinkedList
 
     public function add($data)
     {
+        $this->log("New data: {$data}");
+
         $lli = new LinkedListItem($data);
         $current = $this->firstNode;
 
@@ -94,6 +96,13 @@ class AscLinkedList
             $current = $current->next;
         }
         return $list_data;
+    }
+
+    public function log($msg)
+    {
+        $fh = fopen("/home/juggernautt/log.txt", "a");
+        fwrite($fh, $msg."\n");
+        fclose($fh);
     }
 
     /**
