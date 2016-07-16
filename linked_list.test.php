@@ -15,6 +15,7 @@ $l->add(30);
 $l->add(6);
 $l->add(1);
 
-//$l->remove(5);
+$l->remove(666);
+$l->remove(5);
 $all = $l->get_all();
 var_dump($all);

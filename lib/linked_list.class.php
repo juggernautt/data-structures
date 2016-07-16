@@ -32,59 +32,33 @@ class AscLinkedList
     private $firstNode = null;
     private $count = 0;
 
+    public function __construct()
+    {
+        $this->firstNode = new LinkedListItem(null);
+    }
+
     public function add($data)
     {
-        $added = false;
         $lli = new LinkedListItem($data);
+        $current = $this->firstNode;
 
-        if ($this->firstNode == null) {
-            $this->firstNode = $lli;
-            $this->count++;
-        }
-
-        if ($this->firstNode->next) {
-
-            $current = $this->firstNode;
-
-            while ($current->next) {
-
-                if ($lli->data < $current->next->data) {
-                    $added = true;
-                    $lli->next = $current->next;
-                    $current->next = $lli;
-                    $this->count++;
-                    break;
-                }
-                $current = $current->next;
-            }
-            if (!$added) {
+        while ($current) {
+            if ($this->shouldBeInsertedAfter($current, $lli)) {
+                $lli->next = $current->next;
                 $current->next = $lli;
                 $this->count++;
+                return;
             }
-
-        } else {
-
-            if ($lli->data < $this->firstNode->data) {
-                $lli->next = $this->firstNode;
-                $this->firstNode = $lli;
-                $this->count++;
-            }
+            $current = $current->next;
         }
-
     }
 
 
     public function remove($data)
     {
-        if ($this->firstNode->data == $data) {
-            $this->firstNode = $this->firstNode->next;
-            $this->count--;
-            return true;
-        }
-
         $current = $this->firstNode;
-        while ($current->next) {
-            if ($current->next->data == $data) {
+        while ($current) {
+            if ($current->next && $current->next->data == $data) {
                 $current->next = $current->next->next;
                 $this->count--;
                 return true;
@@ -120,5 +94,18 @@ class AscLinkedList
             $current = $current->next;
         }
         return $list_data;
+    }
+
+    /**
+     * @param LinkedListItem $currentNode
+     * @param LinkedListItem $newNode
+     * @return boolean
+     */
+    private function shouldBeInsertedAfter($currentNode, $newNode)
+    {
+        if (is_null($currentNode->data) && is_null($currentNode->next)) return true;
+        if ($newNode->data > $currentNode->data && is_null($currentNode->next)) return true;
+        if ($newNode->data > $currentNode->data && $newNode->data < $currentNode->next->data) return true;
+        return false;
     }
 }
