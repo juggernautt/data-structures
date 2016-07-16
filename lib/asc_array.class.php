@@ -6,12 +6,14 @@
  * Date: 7/5/16
  * Time: 10:23 PM
  */
-class AscArray
+require_once('basic_data_structure.class.php');
+class AscArray extends BasicDataStructure
 {
     private $data = [];
 
     public function add($entity)
     {
+        $this->log("New data: {$entity->value()}");
         $inserted = false;
         for ($i = 0; $i < count($this->data); $i++) {
             if (is_scalar($entity)) {

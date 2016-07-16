@@ -6,6 +6,7 @@
  * Date: 7/11/16
  * Time: 10:32 PM
  */
+require_once('basic_data_structure.class.php');
 class LinkedListItem
 {
     /**
@@ -24,7 +25,7 @@ class LinkedListItem
     }
 }
 
-class AscLinkedList
+class AscLinkedList extends BasicDataStructure
 {
     /**
      * @var LinkedListItem $firstNode
@@ -98,12 +99,6 @@ class AscLinkedList
         return $list_data;
     }
 
-    public function log($msg)
-    {
-        $fh = fopen("/home/juggernautt/log.txt", "a");
-        fwrite($fh, $msg."\n");
-        fclose($fh);
-    }
 
     /**
      * @param LinkedListItem $currentNode
