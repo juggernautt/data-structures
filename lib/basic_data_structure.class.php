@@ -5,7 +5,7 @@
  * Date: 7/16/16
  * Time: 11:13 PM
  */
-class BasicDataStructure
+abstract class BasicDataStructure
 {
     protected function log($msg)
     {

@@ -7,7 +7,8 @@
  * Time: 10:23 PM
  */
 require_once('basic_data_structure.class.php');
-class AscArray extends BasicDataStructure
+require_once('IDataStructure.php');
+class AscArray extends BasicDataStructure implements IDataStructure
 {
     private $data = [];
 
@@ -40,6 +41,11 @@ class AscArray extends BasicDataStructure
     public function get($index)
     {
         return isset($this->data[$index]) ? $this->data[$index] : null;
+    }
+
+    public function log($msg)
+    {
+        parent::log("AscArray: $msg");
     }
 
 
@@ -94,5 +100,10 @@ class AscArray extends BasicDataStructure
         }
         unset($this->data[count($this->data) - 1]);
         return $num;
+    }
+
+    public function count()
+    {
+        // TODO: Implement count() method.
     }
 }

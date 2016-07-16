@@ -7,6 +7,7 @@
  * Time: 10:32 PM
  */
 require_once('basic_data_structure.class.php');
+require_once('IDataStructure.php');
 class LinkedListItem
 {
     /**
@@ -25,7 +26,7 @@ class LinkedListItem
     }
 }
 
-class AscLinkedList extends BasicDataStructure
+class AscLinkedList extends BasicDataStructure implements IDataStructure
 {
     /**
      * @var LinkedListItem $firstNode
@@ -69,6 +70,12 @@ class AscLinkedList extends BasicDataStructure
             $current = $current->next;
         }
         return false;
+    }
+
+    public function log($msg)
+    {
+        $m = "LinkedList: ".$msg;
+        parent::log($m);
     }
 
     public function get($index)
